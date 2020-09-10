@@ -1,16 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Windows.Forms;
-using System.Net.Mail;
 using System.IO;
-using System.Text;
+using System.Net.Mail;
+using System.Windows.Forms;
 
-namespace TestaSmtp
+namespace TestSmtp
 {
     public partial class Form1 : Form
     {
@@ -69,14 +62,14 @@ namespace TestaSmtp
 
                 cliente.Send(mensagem);
 
-                txtMess.Text = "Email enviado com sucesso";
-                sucesso = "Email enviado com sucesso";
+                txtMess.Text = "傳送成功";
+                sucesso = "傳送成功";
             }
             catch (Exception ex2)
             {
-                sucesso = "Falha";
+                sucesso = "傳送失敗";
                 ex = ex2;
-                txtMess.Text = "Erro Mensagem: " + ex.Message + " || Erro Stack Trace: " + ex.StackTrace;
+                txtMess.Text = "失敗訊息: " + ex.Message + " || 錯誤堆疊: " + ex.StackTrace;
             }
 
         }
@@ -96,9 +89,9 @@ namespace TestaSmtp
                     log.WriteLine("Status: " + sucesso);
                     try
                     {
-                        log.WriteLine("Erro Message: " + ex.Message);
+                        log.WriteLine("錯誤 Message: " + ex.Message);
                         log.WriteLine("Stack Trace: " + ex.StackTrace);
-                        log.WriteLine("Target Site (metodo): " + ex.TargetSite.ToString());
+                        log.WriteLine("Target Site : " + ex.TargetSite.ToString());
                     }
                     catch { }
                     log.WriteLine("");
@@ -159,11 +152,12 @@ namespace TestaSmtp
         private void button1_Click_2(object sender, EventArgs e)
         {
             Stream myStream = null;
-            OpenFileDialog openFileDialog1 = new OpenFileDialog();
-
-            openFileDialog1.InitialDirectory = "c:\\";
-            openFileDialog1.FilterIndex = 2;
-            openFileDialog1.RestoreDirectory = true;
+            OpenFileDialog openFileDialog1 = new OpenFileDialog
+            {
+                InitialDirectory = "c:\\",
+                FilterIndex = 2,
+                RestoreDirectory = true
+            };
 
             if (openFileDialog1.ShowDialog() == DialogResult.OK)
             {
